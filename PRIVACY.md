@@ -25,3 +25,7 @@ Los informes JSON y HTML solo se generan cuando el usuario pulsa el botón corre
 - **content script:** obtener formularios y orígenes de recursos visibles desde la página.
 
 Esta política debe revisarse antes de publicar una versión posterior que cambie la recopilación, almacenamiento o transmisión de datos.
+
+## Uso limitado
+
+El uso de la información recibida mediante las API de Chrome cumple la Política de Datos de Usuario de Chrome Web Store, incluidos sus requisitos de Uso Limitado. Los datos se utilizan exclusivamente para proporcionar al usuario el análisis local solicitado. No se transfieren a terceros, no se utilizan para publicidad, evaluación crediticia ni otros fines ajenos, y ninguna persona accede a ellos.
