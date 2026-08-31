@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>WebSec Inspector</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header class="top">
+      <div>
+        <h1>WebSec Inspector</h1>
+        <div class="brand-subtitle">Browser Security Analysis</div>
+        <div class="brand-author">by SecTF Labs</div>
+        <div id="host" class="host">Analizando…</div>
+      </div>
+      <div id="riskBadge" class="badge neutral">—</div>
+    </header>
+
+    <section class="score-card">
+      <div class="score-line">
+        <span>Security Score</span>
+        <strong id="score">—</strong>
+      </div>
+      <div class="bar"><div id="barFill" class="bar-fill"></div></div>
+      <div id="summary" class="summary">Recopilando señales locales…</div>
+    </section>
+
+    <section>
+      <h2>Resultados</h2>
+      <div id="checks" class="checks"></div>
+    </section>
+
+    <section>
+      <h2>Detalles</h2>
+      <div class="details">
+        <div><span>Redirecciones</span><strong id="redirects">—</strong></div>
+        <div><span>Terceros</span><strong id="thirdParties">—</strong></div>
+        <div><span>Cookies</span><strong id="cookiesCount">—</strong></div>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button id="refresh">Reanalizar</button>
+      <button id="export">Exportar JSON</button>
+    </div>
+
+    <footer class="foot">
+      <div class="foot-brand">WebSec Inspector v0.1.1 · SecTF Labs</div>
+      <div>Local-first security analysis</div>
+    </footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
