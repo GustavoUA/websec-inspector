@@ -1,0 +1,40 @@
+name: Validate and package
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check JavaScript syntax
+        run: |
+          node --check src/background.js
+          node --check src/content.js
+          node --check src/scoring.js
+          node --check src/popup.js
+      - name: Test scoring
+        run: node tests/scoring.test.js
+      - name: Check manifest version
+        run: node -e "const m=require('./manifest.json'); if(m.version!=='1.0.0') process.exit(1)"
+      - name: Build Chrome and Edge package
+        run: |
+          mkdir package
+          cp manifest.json package/
+          cp -r src icons package/
+          cd package
+          zip -r ../websec-inspector-chrome-edge-v1.0.0.zip .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: websec-inspector-chrome-edge-v1.0.0
+          path: websec-inspector-chrome-edge-v1.0.0.zip
