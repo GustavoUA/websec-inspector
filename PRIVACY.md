@@ -22,7 +22,6 @@ Los informes JSON y HTML solo se generan cuando el usuario pulsa el botón corre
 - **activeTab:** identificar y analizar la pestaña seleccionada por el usuario.
 - **webRequest y host_permissions:** observar las cabeceras y redirecciones de la navegación.
 - **cookies:** evaluar atributos como Secure, HttpOnly y SameSite.
-- **storage:** reservado para preferencias locales de la extensión; v1.0.0 no mantiene historial remoto ni local de análisis.
 - **content script:** obtener formularios y orígenes de recursos visibles desde la página.
 
 Esta política debe revisarse antes de publicar una versión posterior que cambie la recopilación, almacenamiento o transmisión de datos.
