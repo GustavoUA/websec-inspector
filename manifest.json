@@ -3,7 +3,7 @@
   "name": "WebSec Inspector",
   "version": "1.0.0",
   "description": "Análisis local y explicable de señales de seguridad web, por SecTF Labs.",
-  "permissions": ["activeTab", "storage", "cookies", "webRequest"],
+  "permissions": ["activeTab", "cookies", "webRequest"],
   "host_permissions": ["<all_urls>"],
   "background": {"service_worker": "src/background.js"},
   "action": {
