@@ -35,7 +35,9 @@ jobs:
       - name: Read manifest version
         id: version
         shell: bash
-        run: echo "version=$(node -p \"require('./manifest.json').version\")" >> "$GITHUB_OUTPUT"
+        run: |
+          VERSION=$(node -p "require('./manifest.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Build Chrome and Edge package
         run: |
