@@ -1,0 +1,61 @@
+name: Publish WebSec Inspector v1.1.0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/release-v1.1.0.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate JavaScript
+        run: |
+          node --check src/background.js
+          node --check src/content.js
+          node --check src/scoring.js
+          node --check src/popup.js
+
+      - name: Run scoring tests
+        run: node tests/scoring.test.js
+
+      - name: Verify release version
+        run: |
+          VERSION=$(node -p "require('./manifest.json').version")
+          if [ "$VERSION" != "1.1.0" ]; then
+            echo "Expected manifest version 1.1.0, got $VERSION"
+            exit 1
+          fi
+
+      - name: Build Chrome and Edge ZIP
+        run: |
+          rm -rf package
+          mkdir package
+          cp manifest.json package/
+          cp -r src icons package/
+          cd package
+          zip -r ../websec-inspector-chrome-edge-v1.1.0.zip .
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v1.1.0 >/dev/null 2>&1; then
+            gh release upload v1.1.0 websec-inspector-chrome-edge-v1.1.0.zip --clobber
+          else
+            gh release create v1.1.0 \
+              websec-inspector-chrome-edge-v1.1.0.zip \
+              --target "$GITHUB_SHA" \
+              --title "WebSec Inspector v1.1.0" \
+              --notes-file RELEASE_NOTES_v1.1.0.md
+          fi
