@@ -1,9 +1,13 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WebSec Inspector</title><link rel="stylesheet" href="popup.css"></head>
-<body><main><header class="top"><div><h1>WebSec Inspector</h1><div class="subtitle">Browser Security Analysis · <b>SecTF Labs</b></div><div id="host" class="host">Analizando…</div></div><div id="riskBadge" class="badge neutral">—</div></header>
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WebSec Inspector</title><link rel="stylesheet" href="popup.css"></head>
+<body><main>
+<header class="top"><div><h1>WebSec Inspector</h1><div class="subtitle">Browser Security Analysis · <b>SecTF Labs</b></div><div id="host" class="host">Analizando…</div></div><div id="riskBadge" class="badge neutral">—</div></header>
 <section class="score-card"><div class="score-line"><span>Security Score</span><strong id="score">—</strong></div><div class="bar"><div id="barFill"></div></div><div id="summary">Recopilando señales locales…</div><div id="counts" class="counts"></div></section>
+<section class="threat-card"><div class="section-head"><div><h2>Threat Intelligence</h2><span>AbuseIPDB · reputación de IP</span></div><span id="abuseStatus" class="mini-badge neutral">SIN CONFIGURAR</span></div><div id="abuseResult" class="threat-result">Añade tu API Key para activar la comprobación de reputación.</div><details id="apiSettings"><summary>Configurar API Key</summary><div class="api-row"><input id="apiKey" type="password" autocomplete="off" placeholder="AbuseIPDB API Key"><button id="saveApiKey">Guardar</button><button id="removeApiKey" class="ghost">Eliminar</button></div><div id="apiMessage" class="api-note">La clave se guarda solo en chrome.storage.local de esta instalación.</div></details></section>
 <nav><button class="tab active" data-tab="results">Resultados</button><button class="tab" data-tab="details">Detalles</button></nav>
 <section id="results" class="panel"><div id="checks" class="checks"></div></section>
 <section id="details" class="panel hidden"><div class="metrics"><div><span>Redirecciones</span><b id="redirects">—</b></div><div><span>Terceros</span><b id="thirdParties">—</b></div><div><span>Cookies</span><b id="cookiesCount">—</b></div></div><h2>Desglose</h2><div id="breakdown"></div></section>
 <div class="actions"><button id="refresh">Reanalizar</button><button id="exportJson">JSON</button><button id="exportHtml">Informe HTML</button></div>
-<footer>WebSec Inspector v1.0.0 · SecTF Labs<br><span>Local-first security analysis · El resultado es orientativo</span></footer></main><script src="scoring.js"></script><script src="popup.js"></script></body></html>
-
+<footer>WebSec Inspector v1.1.0 · SecTF Labs<br><span>Local-first security analysis + Threat Intelligence · El resultado es orientativo</span></footer>
+</main><script src="scoring.js"></script><script src="popup.js"></script></body></html>
