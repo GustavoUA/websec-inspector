@@ -1,10 +1,10 @@
-name: Publish WebSec Inspector v1.1.0
+name: Publish WebSec Inspector v1.2
 
 on:
   push:
     branches: [main]
     paths:
-      - ".github/workflows/release-v1.1.0.yml"
+      - ".github/workflows/release-v1.2.yml"
 
 permissions:
   contents: write
@@ -27,13 +27,16 @@ jobs:
           node --check src/popup.js
 
       - name: Run scoring tests
-        run: node tests/scoring.test.js
+        run: |
+          node tests/scoring.test.js
+          node tests/regressions.test.js
+          node tests/popup.test.js
 
       - name: Verify release version
         run: |
           VERSION=$(node -p "require('./manifest.json').version")
-          if [ "$VERSION" != "1.1.0" ]; then
-            echo "Expected manifest version 1.1.0, got $VERSION"
+          if [ "$VERSION" != "1.2.0" ]; then
+            echo "Expected manifest version 1.2.0, got $VERSION"
             exit 1
           fi
 
@@ -44,18 +47,18 @@ jobs:
           cp manifest.json package/
           cp -r src icons package/
           cd package
-          zip -r ../websec-inspector-chrome-edge-v1.1.0.zip .
+          zip -r ../websec-inspector-chrome-edge-v1.2.zip .
 
       - name: Publish GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if gh release view v1.1.0 >/dev/null 2>&1; then
-            gh release upload v1.1.0 websec-inspector-chrome-edge-v1.1.0.zip --clobber
+          if gh release view v1.2 >/dev/null 2>&1; then
+            gh release upload v1.2 websec-inspector-chrome-edge-v1.2.zip --clobber
           else
-            gh release create v1.1.0 \
-              websec-inspector-chrome-edge-v1.1.0.zip \
+            gh release create v1.2 \
+              websec-inspector-chrome-edge-v1.2.zip \
               --target "$GITHUB_SHA" \
-              --title "WebSec Inspector v1.1.0" \
-              --notes-file RELEASE_NOTES_v1.1.0.md
+              --title "WebSec Inspector v1.2" \
+              --notes-file RELEASE_NOTES_v1.2.md
           fi

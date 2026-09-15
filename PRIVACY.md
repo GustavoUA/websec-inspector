@@ -1,10 +1,10 @@
 # Política de privacidad — WebSec Inspector
 
-Versión 1.1.0
+Versión 1.2
 
 Desarrollador y editor: **SecTF Labs**.
 
-WebSec Inspector es una extensión de análisis de seguridad web para Chrome y Edge. La mayor parte del análisis se realiza localmente en el navegador. La versión 1.1.0 incorpora además una integración opcional de Threat Intelligence con AbuseIPDB.
+WebSec Inspector es una extensión de análisis de seguridad web para Chrome y Edge. La mayor parte del análisis se realiza localmente en el navegador. La versión 1.2 incluye además una integración opcional de Threat Intelligence con AbuseIPDB.
 
 ## Datos utilizados para el análisis local
 
@@ -71,6 +71,10 @@ El usuario es responsable de mantener su API Key privada y de cumplir las condic
 
 Para una distribución pública o comercial futura, SecTF Labs podrá sustituir el almacenamiento de credenciales en el cliente por una arquitectura backend que evite exponer credenciales de servicio dentro de la extensión.
 
+## Historial local voluntario
+
+Puedes guardar hasta 50 resúmenes de análisis y borrarlos desde la extensión. Solo se guardan al pulsar Guardar análisis; no se envían a SecTF Labs. Consulta el detalle de datos al final de esta política.
+
 ## Caché local
 
 WebSec Inspector puede almacenar temporalmente resultados de Threat Intelligence para evitar consultas repetidas innecesarias y reducir el consumo de cuota de las APIs externas.
@@ -90,14 +94,14 @@ El usuario decide dónde guardar los informes y con quién compartirlos.
 - **activeTab:** identificar y analizar la pestaña seleccionada por el usuario.
 - **webRequest y host_permissions:** observar cabeceras, navegación y redirecciones necesarias para el análisis.
 - **cookies:** evaluar atributos de seguridad como Secure, HttpOnly y SameSite.
-- **storage:** almacenar localmente la configuración de la integración, incluida la API Key proporcionada por el usuario, y la caché temporal necesaria para el funcionamiento de Threat Intelligence.
+- **storage:** almacenar localmente la configuración de la integración, incluida la API Key proporcionada por el usuario, el historial voluntario de análisis y la caché temporal necesaria para el funcionamiento de Threat Intelligence.
 - **content script:** obtener señales de seguridad visibles desde la página, como formularios y orígenes de recursos.
 
 ## Transferencia a terceros
 
 WebSec Inspector no transmite los resultados del análisis a SecTF Labs.
 
-Cuando el usuario activa y utiliza funciones de Threat Intelligence, determinados datos técnicos estrictamente necesarios pueden transmitirse a proveedores externos para prestar esa función. En la versión 1.1.0 esto incluye la dirección IP consultada en AbuseIPDB y, cuando sea necesario para resolverla, el hostname enviado al servicio DNS utilizado.
+Cuando el usuario activa y utiliza funciones de Threat Intelligence, determinados datos técnicos estrictamente necesarios pueden transmitirse a proveedores externos para prestar esa función. En la versión 1.2 esto incluye la dirección IP consultada en AbuseIPDB y, cuando sea necesario para resolverla, el hostname enviado al servicio DNS utilizado.
 
 No se realizan estas transferencias con fines publicitarios, comerciales basados en datos de navegación ni para crear perfiles de usuario.
 
@@ -110,7 +114,7 @@ La transmisión de datos técnicos a servicios externos se limita a lo necesario
 ## Cambios en esta política
 
 Esta política deberá actualizarse cuando una versión futura incorpore nuevos proveedores externos, modifique los datos tratados o cambie de forma significativa la recopilación, almacenamiento o transmisión de información.
-# Actualización de privacidad — versión 1.2.0
+# Actualización de privacidad — versión 1.2
 
 El historial es voluntario y solo se guarda al pulsar "Guardar análisis".
 Se conservan como máximo 50 resúmenes en chrome.storage.local: origen (protocolo,
