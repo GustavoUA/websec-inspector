@@ -1,6 +1,6 @@
-# WebSec Inspector v1.2.0
+# WebSec Inspector v1.2
 
-## Novedades 1.2.0
+## Novedades 1.2
 
 - Reglas CSP por directiva: fuentes concretas, nonce/hash y frame-ancestors.
 - Cobertura explícita de cabeceras, página y cookies; resultado parcial si faltan datos.
@@ -20,13 +20,13 @@ Los informes exportados contienen evidencias técnicas y la URL analizada; revis
 
 WebSec Inspector es una extensión de código abierto para Chrome y Edge basada en Manifest V3. Combina análisis local y explicable de señales de seguridad web con inteligencia de amenazas mediante AbuseIPDB para aportar contexto adicional sobre la reputación de la infraestructura que aloja una web.
 
-## Novedades de v1.1.0
+## Funciones de Threat Intelligence
 
 - Integración opcional con **AbuseIPDB API v2**.
 - Resolución del hostname analizado a dirección IP mediante DNS-over-HTTPS.
 - Consulta de reputación de la IP asociada al sitio.
 - Visualización de `abuseConfidenceScore`, reportes, país, ISP y tipo de uso cuando están disponibles.
-- Nueva sección **Threat Intelligence** en la interfaz.
+- Sección **Threat Intelligence** en la interfaz.
 - Clasificación de riesgo de la IP como señal complementaria al análisis web local.
 - Security Score combinado: análisis local como señal principal y AbuseIPDB con una ponderación moderada.
 - Caché temporal de consultas para reducir consumo de cuota de la API.
@@ -37,7 +37,7 @@ WebSec Inspector no considera una IP reportada como prueba de que una web sea ma
 
 ## Instalación manual
 
-1. Descarga el código de la rama/release **v1.1.0**.
+1. Descarga el paquete [WebSec Inspector v1.2](dist/websec-inspector-v1.2.zip).
 2. Descomprime el paquete.
 3. Abre `chrome://extensions` o `edge://extensions`.
 4. Activa el modo de desarrollador.
@@ -120,7 +120,7 @@ La integración de Threat Intelligence se gestiona desde el service worker `src/
 
 ## Roadmap
 
-La arquitectura de v1.1.0 permite incorporar nuevas fuentes de Threat Intelligence en futuras versiones, por ejemplo VirusTotal, urlscan.io o ThreatFox, manteniendo cada proveedor como una señal independiente dentro del análisis.
+La arquitectura de v1.2 permite incorporar nuevas fuentes de Threat Intelligence en futuras versiones, por ejemplo VirusTotal, urlscan.io o ThreatFox, manteniendo cada proveedor como una señal independiente dentro del análisis.
 
 ## Licencia
 
@@ -128,7 +128,7 @@ Publicado bajo la [licencia MIT](LICENSE).
 
 ## Historial
 
-- **1.1.0:** integración opcional con AbuseIPDB, resolución de IP, Threat Intelligence, caché y score combinado.
+- **1.2:** análisis contextual mejorado, cobertura explícita, prioridades e historial local con comparación. Incluye AbuseIPDB y exportación de informes.
 - **1.0.0:** análisis contextual, resultados explicados, desglose, informe HTML y pruebas.
 - **0.1.1:** identidad SecTF Labs.
 - **0.1.0:** MVP inicial.

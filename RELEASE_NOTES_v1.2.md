@@ -1,4 +1,4 @@
-# WebSec Inspector 1.2.0
+# WebSec Inspector 1.2
 
 Mejora la interpretación de CSP y frame-ancestors, muestra cobertura del análisis y prioriza acciones. Añade historial local voluntario limitado a 50 resúmenes y comparación por origen entre análisis completos. Corrige redirecciones y evita que la reputación IP aumente la puntuación local. Añade límites de espera a las consultas externas.
 
