@@ -24,9 +24,13 @@ jobs:
           node --check src/content.js
           node --check src/scoring.js
           node --check src/popup.js
+          node --check src/history.js
 
       - name: Test scoring
-        run: node tests/scoring.test.js
+        run: |
+          node tests/scoring.test.js
+          node tests/regressions.test.js
+          node tests/popup.test.js
 
       - name: Check manifest version
         run: |

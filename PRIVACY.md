@@ -110,3 +110,14 @@ La transmisión de datos técnicos a servicios externos se limita a lo necesario
 ## Cambios en esta política
 
 Esta política deberá actualizarse cuando una versión futura incorpore nuevos proveedores externos, modifique los datos tratados o cambie de forma significativa la recopilación, almacenamiento o transmisión de información.
+# Actualización de privacidad — versión 1.2.0
+
+El historial es voluntario y solo se guarda al pulsar "Guardar análisis".
+Se conservan como máximo 50 resúmenes en chrome.storage.local: origen (protocolo,
+dominio y puerto), fecha, puntuación local, cobertura, nombres/estados/penalizaciones
+de hallazgos y orígenes externos observados. No incluye rutas, parámetros, fragmentos,
+valores de cookies, cabeceras, contenido de páginas ni claves de API.
+El botón "Borrar historial" elimina todos esos resúmenes sin eliminar la clave de AbuseIPDB.
+Los resúmenes no se envían a SecTF Labs. El usuario debe revisar los informes
+HTML/JSON antes de compartirlos: estos sí incluyen URL y evidencias del análisis.
+
