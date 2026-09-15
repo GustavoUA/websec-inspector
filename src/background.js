@@ -29,7 +29,7 @@ function isPublicIp(ip) {
 async function resolveHostname(hostname) {
   const query = async type => {
     const url = `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(hostname)}&type=${type}`;
-    const response = await fetch(url, { headers: { Accept: "application/dns-json" } });
+    const response = await fetch(url, { signal: AbortSignal.timeout(10000), headers: { Accept: "application/dns-json" } });
     if (!response.ok) throw new Error(`DNS HTTP ${response.status}`);
     const body = await response.json();
     return (body.Answer || []).filter(a => (type === "A" ? a.type === 1 : a.type === 28)).map(a => a.data).filter(isPublicIp);
@@ -56,7 +56,7 @@ async function checkAbuseIpDb(hostname, force = false) {
   const endpoint = new URL("https://api.abuseipdb.com/api/v2/check");
   endpoint.searchParams.set("ipAddress", resolved.ip);
   endpoint.searchParams.set("maxAgeInDays", "90");
-  const response = await fetch(endpoint.toString(), { method: "GET", headers: { Accept: "application/json", Key: key } });
+  const response = await fetch(endpoint.toString(), { method: "GET", signal: AbortSignal.timeout(10000), headers: { Accept: "application/json", Key: key } });
   let body = null;
   try { body = await response.json(); } catch {}
   if (!response.ok) {
@@ -78,7 +78,10 @@ async function checkAbuseIpDb(hostname, force = false) {
 
 chrome.webRequest.onBeforeRequest.addListener(details => {
   if (details.tabId < 0 || details.type !== "main_frame") return;
-  tabState.set(details.tabId, { url: details.url, startedAt: Date.now(), redirects: 0, headers: {}, statusCode: null });
+  const previous = tabState.get(details.tabId);
+  if (previous?.requestId === details.requestId) {
+    previous.url = details.url; previous.headers = {}; previous.headersCaptured = false;
+  } else tabState.set(details.tabId, { requestId:details.requestId, url: details.url, startedAt: Date.now(), redirects: 0, headers: {}, headersCaptured:false, statusCode: null });
 }, { urls: ["<all_urls>"], types: ["main_frame"] });
 
 chrome.webRequest.onBeforeRedirect.addListener(details => {
@@ -90,7 +93,7 @@ chrome.webRequest.onBeforeRedirect.addListener(details => {
 chrome.webRequest.onHeadersReceived.addListener(details => {
   if (details.tabId < 0 || details.type !== "main_frame") return;
   const state = tabState.get(details.tabId) || {};
-  state.url = details.url; state.headers = normalizeHeaders(details.responseHeaders); state.statusCode = details.statusCode; state.finishedAt = Date.now(); tabState.set(details.tabId, state);
+  state.url = details.url; state.headers = normalizeHeaders(details.responseHeaders); state.headersCaptured = true; state.statusCode = details.statusCode; state.finishedAt = Date.now(); tabState.set(details.tabId, state);
 }, { urls: ["<all_urls>"], types: ["main_frame"] }, ["responseHeaders"]);
 
 chrome.tabs?.onRemoved?.addListener(tabId => tabState.delete(tabId));

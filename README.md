@@ -1,4 +1,20 @@
-# WebSec Inspector v1.1.0
+# WebSec Inspector v1.2.0
+
+## Novedades 1.2.0
+
+- Reglas CSP por directiva: fuentes concretas, nonce/hash y frame-ancestors.
+- Cobertura explícita de cabeceras, página y cookies; resultado parcial si faltan datos.
+- Hasta tres acciones prioritarias y lista de orígenes externos observados.
+- Historial local voluntario: guardar y borrar, máximo 50 resúmenes por instalación.
+- Comparación por origen con el último resumen guardado. Solo entre análisis completos;
+  distintas páginas del mismo origen pueden mostrar señales diferentes.
+- Historial sin rutas, parámetros, fragmentos, cabeceras, cookies ni claves.
+- AbuseIPDB solo resta hasta 20 puntos; no mejora la puntuación local.
+- Recuento de redirecciones conservado durante una navegación.
+- Cookies temporales sin HttpOnly: revisión contextual sin penalización automática.
+
+Pruebas: `node tests/scoring.test.js` y `node tests/regressions.test.js`.
+Los informes exportados contienen evidencias técnicas y la URL analizada; revisarlos antes de compartir.
 
 **Browser Security Analysis & Threat Intelligence · by SecTF Labs**
 
